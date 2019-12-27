@@ -1,0 +1,445 @@
+# Copyright (C) 2012 The Android Open Source Project
+#
+# IMPORTANT: Do not create world writable files or directories.
+# This is a common source of Android security bugs.
+#
+
+#-------------
+# CPU Govenor 
+#-------------
+on property:persist.cpk.cpu_gov="zzmoove"
+    write /sys/module/intelli_plug/parameters/intelli_plug_active 0
+    #write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor zzmoove
+    #write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor zzmoove
+    #write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor zzmoove
+    #write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor zzmoove
+
+#-----------------
+# ZZMoove profiles
+#-----------------
+# for more details see: https://github.com/fidoedidoe/android_kernel_samsung_smdk4412/blob/cm-14.1-custom-zzmoove/drivers/cpufreq/cpufreq_zzmoove_profiles.h
+
+#  1: Default              - will set govenor defaults
+#  2: Yank Battery         - a very good battery/performance balanced setting
+#  3: Yank Battery Extreme - like yank battery but focus on battery saving
+#  4: ZZ Battery           - a more 'harsh' setting strictly focused on battery saving (may lag)
+#  5: ZZ battery plus      - reworked 'faster' battery setting
+#  6: ZZ Optimised         - balanced setting with no focus in any direction (relic from back in the day)
+#  7: ZZ Moderate          - based on 'zz optimised' which has mainly (but not strictly only!) 2 cores online
+#  8: ZZ Performance       - all you can get from zzmoove in terms of performance but still has the fast down scaling/hotplugging behaving
+#  9: ZZ InZane            - based on performance with new insane scaling active. a new experience
+# 10: ZZ Gaming            - based on performance with scaling block enabled to avoid cpu overheating during gamepla
+# 11: ZZ Relax             - based on moderate (except hotplug settings) with relaxed sleep settings 
+
+on property:persist.cpk.zzm_profile="1"
+    write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 1
+
+on property:persist.cpk.zzm_profile="2"
+    write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 2
+
+on property:persist.cpk.zzm_profile="3"
+    write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 3
+
+on property:persist.cpk.zzm_profile="4"
+    write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 4
+
+on property:persist.cpk.zzm_profile="5"
+    write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 5
+
+on property:persist.cpk.zzm_profile="6"
+    write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 6
+
+on property:persist.cpk.zzm_profile="7"
+    write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 7
+
+on property:persist.cpk.zzm_profile="8"
+    write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 8
+
+on property:persist.cpk.zzm_profile="9"
+    write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 9
+
+on property:persist.cpk.zzm_profile="10"
+    write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 10
+
+on property:persist.cpk.zzm_profile="11"
+    write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 11
+
+
+#-----------------
+# CPU Min/Max Freq
+#-----------------
+
+on property:persist.cpk.cpu_min="100000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 100000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 100000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 100000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 100000
+
+
+on property:persist.cpk.cpu_min="200000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 200000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 200000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 200000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 200000
+
+
+on property:persist.cpk.cpu_max="1600000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1600000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1600000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1600000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1600000
+
+on property:persist.cpk.cpu_max="1704000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1704000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1704000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1704000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1704000
+
+on property:persist.cpk.cpu_max="1800000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1800000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1800000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1800000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1800000
+
+on property:persist.cpk.cpu_max="1920000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1920000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1920000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1920000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1920000
+
+#------------------------------
+# GPU Freq, Scaling & Undervolt
+#------------------------------
+
+
+# 1-0 : Default  - Freq 160Mhz / 266Mhz / 350Mhz / 440Mhz / 533Mhz
+#       -0mv     - up-down % threshold to: 99-65; 99-57; 99-67; 99-70;
+#                - set undervolt to: -0mv from base
+# 1-25: Default  - Freq 160Mhz / 266Mhz / 350Mhz / 440Mhz / 533Mhz
+#       -25mv    - up-down % threshold to: 99-65; 99-57; 99-67; 99-70;
+#                - set undervolt to: -25mv (25000) from base
+# 1-50: Default  - Freq 160Mhz / 266Mhz / 350Mhz / 440Mhz / 533Mhz
+#       -50mv    - up-down % threshold to: 99-65; 99-57; 99-67; 99-70;
+#                - set undervolt to: -50mv (50000) from base
+# 2-0:  Spread 1 - Freq to: 108Mhz / 160Mhz / 275Mhz / 440Mhz / 533Mhz
+#       -0mv     - up-down % threshold to: 65-40; 75-40; 80-50; 85-60;
+#                - undervolt to: -25mv from base
+# 2-25: Spread 1 - Freq to: 108Mhz / 160Mhz / 275Mhz / 440Mhz / 533Mhz
+#       -25mv    - up-down % threshold to: 65-40; 75-40; 80-50; 85-60;
+#                - undervolt to: -25mv from base
+# 2-50: Spread 1 - Freq to: 108Mhz / 160Mhz / 275Mhz / 440Mhz / 533Mhz
+#       -50mv    - up-down % threshold to: 65-40; 75-40; 80-50; 85-60;
+#                - undervolt to: -50mv from base
+# 3-0:  Spread 2 - freq to: 54Mhz / 108hz / 266Mhz / 440Mhz / 533Mhz
+#       -0mv    - up-down % threshold to: 99-49; 99-39; 99-65; 99-74;
+#                - undervolt to: -0mv from base
+# 3-25: Spread 2 - freq to: 54Mhz / 108hz / 266Mhz / 440Mhz / 533Mhz
+#       -25mv    - up-down % threshold to: 99-49; 99-39; 99-65; 99-74;
+#                - undervolt to: -25mv from base
+# 3-50: Spread 2 - freq to: 54Mhz / 108hz / 266Mhz / 440Mhz / 533Mhz
+#       -50mv    - up-down % threshold to: 99-49; 99-39; 99-65; 99-74;
+#                - undervolt to: -50mv from base
+# 4-0:  Spread 3 - freq to: 54Mhz / 160hz / 300Mhz / 440Mhz / 600Mhz
+#       -0mv     - up-down % threshold to: 99-32; 99-52; 99-67; 99-72;
+#                - undervolt to: -0mv from base
+# 4-25: Spread 3 - freq to: 54Mhz / 160hz / 300Mhz / 440Mhz / 600Mhz
+#       -25mv    - up-down % threshold to: 99-32; 99-52; 99-67; 99-72;
+#                - undervolt to: -25mv from base
+# 4-50: Spread 3 - freq to: 54Mhz / 160hz / 300Mhz / 440Mhz / 600Mhz
+#       -50mv    - up-down % threshold to: 99-32; 99-52; 99-67; 99-72;
+#                - undervolt to: -50mv from base
+# 5-0:  Spread 4 - freq to: 54Mhz / 200hz / 350Mhz / 500Mhz / 666Mhz
+#       -0mv     - up-down % threshold to: 99-25; 99-55; 99-68; 99-74;
+#                - undervolt to: -0mv from base
+# 5-25: Spread 4 - freq to: 54Mhz / 200hz / 350Mhz / 500Mhz / 666Mhz
+#       -25mv    - up-down % threshold to: 99-25; 99-55; 99-68; 99-74;
+#                - undervolt to: -25mv from base
+# 5-50: Spread 4 - freq to: 54Mhz / 200hz / 350Mhz / 500Mhz / 666Mhz
+#       -50mv    - up-down % threshold to: 99-25; 99-55; 99-68; 99-74;
+#                - undervolt to: -50mv from base
+# 6-0:  Batt   1 - freq to: 54Mhz / 108hz / 160Mhz / 266Mhz / 350Mhz
+#       -0mv     - up-down % threshold to: 95-45; 95-60; 95-55; 95-70;
+#                - undervolt to: -0mv from base
+# 6-25: Batt   1 - freq to: 54Mhz / 108hz / 160Mhz / 266Mhz / 350Mhz
+#       -25mv    - up-down % threshold to: 95-45; 95-60; 95-55; 95-70;
+#                - undervolt to: -25mv from base
+# 6-50: Batt   1 - freq to: 54Mhz / 108hz / 160Mhz / 266Mhz / 350Mhz
+#       -50mv    - up-down % threshold to: 95-45; 95-60; 95-55; 95-70;
+#                - undervolt to: -50mv from base
+# 7-0:  Game   1 - freq to: 160Mhz / 266hz / 400Mhz / 533Mhz / 666Mhz
+#       -0mv     - up-down % threshold to: 90-50; 90-55; 90-66; 90-70;
+#                - undervolt to: -0mv from base
+# 7-25: Game   1 - freq to: 160Mhz / 266hz / 400Mhz / 533Mhz / 666Mhz
+#       -25mv    - up-down % threshold to: 90-50; 90-55; 90-66; 90-70;
+#                - undervolt to: -25mv from base
+# 7-25: Game   1 - freq to: 160Mhz / 266hz / 400Mhz / 533Mhz / 666Mhz
+#       -50mv    - up-down % threshold to: 90-50; 90-55; 90-66; 90-70;
+#                - undervolt to: -50mv from base
+                
+on property:persist.cpk.gpu_profile="1-0"
+   write /sys/class/misc/gpu_control/gpu_clock_control "160 266 350 440 533"
+   write /sys/class/misc/gpu_control/gpu_clock_control "70% 62% 90% 85% 90% 85% 90% 85%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "937500 962500 1012500 1075000 1137500"
+
+on property:persist.cpk.gpu_profile="1-25"
+   write /sys/class/misc/gpu_control/gpu_clock_control "160 266 350 440 533"
+   write /sys/class/misc/gpu_control/gpu_clock_control "70% 62% 90% 85% 90% 85% 90% 85%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "912500 937500 987500 1050000 1112500"
+
+on property:persist.cpk.gpu_profile="1-50"
+   write /sys/class/misc/gpu_control/gpu_clock_control "160 266 350 440 533"
+   write /sys/class/misc/gpu_control/gpu_clock_control "70% 62% 90% 85% 90% 85% 90% 85%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "882500 912500 962500 1025000 1087500"
+
+on property:persist.cpk.gpu_profile="2-0"
+   write /sys/class/misc/gpu_control/gpu_clock_control "108 160 275 400 533"
+   write /sys/class/misc/gpu_control/gpu_clock_control "65% 40% 75% 40% 80% 50% 85% 60%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "935000 937500 972500 1042500 1137500"
+
+on property:persist.cpk.gpu_profile="2-25"
+   write /sys/class/misc/gpu_control/gpu_clock_control "108 160 275 400 533"
+   write /sys/class/misc/gpu_control/gpu_clock_control "65% 40% 75% 40% 80% 50% 85% 60%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "910000 912500 947500 1017500 1112500"
+
+on property:persist.cpk.gpu_profile="2-50"
+   write /sys/class/misc/gpu_control/gpu_clock_control "108 160 275 400 533"
+   write /sys/class/misc/gpu_control/gpu_clock_control "65% 40% 75% 40% 80% 50% 85% 60%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "885000 887500 922500 992500 1087500"
+
+on property:persist.cpk.gpu_profile="3-0"
+   write /sys/class/misc/gpu_control/gpu_clock_control "54 108 266 400 533"
+   write /sys/class/misc/gpu_control/gpu_clock_control "99% 49% 99% 39% 95% 65% 99% 74%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "932500 935000 962500 1042500 1137500"
+
+on property:persist.cpk.gpu_profile="3-25"
+   write /sys/class/misc/gpu_control/gpu_clock_control "54 108 266 400 533"
+   write /sys/class/misc/gpu_control/gpu_clock_control "99% 49% 99% 39% 95% 65% 99% 74%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "907500 910000 937500 1017500 1112500"
+
+on property:persist.cpk.gpu_profile="3-50"
+   write /sys/class/misc/gpu_control/gpu_clock_control "54 108 266 400 533"
+   write /sys/class/misc/gpu_control/gpu_clock_control "99% 49% 99% 39% 95% 65% 99% 74%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "882500 885000 912500 992500 1087500"
+
+on property:persist.cpk.gpu_profile="4-0"
+   write /sys/class/misc/gpu_control/gpu_clock_control "54 160 333 500 600"
+   write /sys/class/misc/gpu_control/gpu_clock_control "99% 32% 99% 52% 95% 67% 99% 72%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "932500 937500 995000 1107500 1165000"
+
+on property:persist.cpk.gpu_profile="4-25"
+   write /sys/class/misc/gpu_control/gpu_clock_control "54 160 333 500 600"
+   write /sys/class/misc/gpu_control/gpu_clock_control "99% 32% 99% 52% 95% 67% 99% 72%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "907500 912500 970000 1082500 1140000"
+
+on property:persist.cpk.gpu_profile="4-50"
+   write /sys/class/misc/gpu_control/gpu_clock_control "54 160 333 500 600"
+   write /sys/class/misc/gpu_control/gpu_clock_control "99% 32% 99% 52% 95% 67% 99% 72%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "882500 887500 945000 1057500 1115000"
+
+on property:persist.cpk.gpu_profile="5-0"
+   write /sys/class/misc/gpu_control/gpu_clock_control "54 200 350 500 666"
+   write /sys/class/misc/gpu_control/gpu_clock_control "99% 25% 99% 55% 95% 68% 99% 74%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "932500 950000 1012500 1107500 1210000"
+
+on property:persist.cpk.gpu_profile="5-25"
+   write /sys/class/misc/gpu_control/gpu_clock_control "54 200 350 500 666"
+   write /sys/class/misc/gpu_control/gpu_clock_control "99% 25% 99% 55% 95% 68% 99% 74%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "907500 925000 987500 1082500 1185000"
+
+on property:persist.cpk.gpu_profile="5-50"
+   write /sys/class/misc/gpu_control/gpu_clock_control "54 200 350 500 666"
+   write /sys/class/misc/gpu_control/gpu_clock_control "99% 25% 99% 55% 95% 68% 99% 74%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "882500 900000 962500 1057500 1160000"
+
+on property:persist.cpk.gpu_profile="6-0"
+   write /sys/class/misc/gpu_control/gpu_clock_control "54 108 160 266 350"
+   write /sys/class/misc/gpu_control/gpu_clock_control "95% 45% 95% 60% 95% 55% 95% 70%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "932500 935000 937500 962500 1012500"
+
+on property:persist.cpk.gpu_profile="6-25"
+   write /sys/class/misc/gpu_control/gpu_clock_control "54 108 160 266 350"
+   write /sys/class/misc/gpu_control/gpu_clock_control "95% 45% 95% 60% 95% 55% 95% 70%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "907500 910000 912500 937500 987500"
+
+on property:persist.cpk.gpu_profile="6-50"
+   write /sys/class/misc/gpu_control/gpu_clock_control "54 108 160 266 350"
+   write /sys/class/misc/gpu_control/gpu_clock_control "95% 45% 95% 60% 95% 55% 95% 70%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "882500 885000 887500 912500 962500"
+
+on property:persist.cpk.gpu_profile="7-0"
+   write /sys/class/misc/gpu_control/gpu_clock_control "160 266 400 533 666"
+   write /sys/class/misc/gpu_control/gpu_clock_control "90% 50% 90% 55% 90% 66% 90% 70%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "937500 962500 1042500 1137500 1210000"
+
+on property:persist.cpk.gpu_profile="7-25"
+   write /sys/class/misc/gpu_control/gpu_clock_control "160 266 400 533 666"
+   write /sys/class/misc/gpu_control/gpu_clock_control "90% 50% 90% 55% 90% 66% 90% 70%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "912500 937500 1017500 1112500 1185000"
+
+on property:persist.cpk.gpu_profile="7-50"
+   write /sys/class/misc/gpu_control/gpu_clock_control "160 266 400 533 666"
+   write /sys/class/misc/gpu_control/gpu_clock_control "90% 50% 90% 55% 90% 66% 90% 70%"
+   write /sys/class/misc/gpu_control/gpu_voltage_control "887500 912500 992500 1087500 1160000"
+
+#----------------------------------
+# Storage: Internal Read Ahead (KB)
+#----------------------------------
+
+on property:persist.cpk.sdcard_ra_kb="0"
+   write /sys/block/mmcblk0/bdi/read_ahead_kb 0
+
+on property:persist.cpk.sdcard_ra_kb="64"
+   write /sys/block/mmcblk0/bdi/read_ahead_kb 64
+
+on property:persist.cpk.sdcard_ra_kb="128"
+   write /sys/block/mmcblk0/bdi/read_ahead_kb 128
+
+on property:persist.cpk.sdcard_ra_kb="192"
+   write /sys/block/mmcblk0/bdi/read_ahead_kb 192
+
+on property:persist.cpk.sdcard_ra_kb="256"
+   write /sys/block/mmcblk0/bdi/read_ahead_kb 256
+
+#--------------------------------------------
+# Storage: External (SD Card) Read Ahead (KB)
+#--------------------------------------------
+
+on property:persist.cpk.sdcard_ra_kb="0"
+   write /sys/block/mmcblk1/bdi/read_ahead_kb 0
+
+on property:persist.cpk.sdcard_ra_kb="64"
+   write /sys/block/mmcblk1/bdi/read_ahead_kb 64
+
+on property:persist.cpk.sdcard_ra_kb="128"
+   write /sys/block/mmcblk1/bdi/read_ahead_kb 128
+
+on property:persist.cpk.sdcard_ra_kb="192"
+   write /sys/block/mmcblk1/bdi/read_ahead_kb 192
+
+on property:persist.cpk.sdcard_ra_kb="256"
+   write /sys/block/mmcblk1/bdi/read_ahead_kb 256
+
+
+#--------------
+# CPU Idle mode
+# -------------
+
+# 0 = IDLE
+# 1 = AFTR
+# 2 = IDLE || LPA
+# 3 = AFTR || LPA
+
+on property:persist.cpk.cpu_idle="0"
+   write /sys/module/cpuidle_exynos4/parameters/enable_mask 1
+
+on property:persist.cpk.cpu_idle="1"
+   write /sys/module/cpuidle_exynos4/parameters/enable_mask 1
+
+on property:persist.cpk.cpu_idle="2"
+   write /sys/module/cpuidle_exynos4/parameters/enable_mask 2
+
+on property:persist.cpk.cpu_idle="3"
+   write /sys/module/cpuidle_exynos4/parameters/enable_mask 3
+
+#-----------------
+# Module Debugging (specific modules only)
+# ----------------
+
+on property:persist.cpk.module_debug="1"
+   write /sys/module/ump/parameters/ump_debug_level 2
+   write /sys/module/mali/parameters/mali_debug_level 2
+   write /sys/module/kernel/parameters/initcall_debug N
+   write /sys/module/lowmemorykiller/parameters/debug_level 1
+   write /sys/module/earlysuspend/parameters/debug_mask 1
+   write /sys/module/alarm/parameters/debug_mask 3
+   write /sys/module/alarm_dev/parameters/debug_mask 1
+   write /sys/module/binder/parameters/debug_mask 7
+   write /sys/module/xt_qtaguid/parameters/debug_mask 0 
+
+on property:persist.cpk.module_debug="0"
+   write /sys/module/ump/parameters/ump_debug_level 0
+   write /sys/module/mali/parameters/mali_debug_level 0
+   write /sys/module/kernel/parameters/initcall_debug 0
+   write /sys/module/lowmemorykiller/parameters/debug_level 0
+   write /sys/module/earlysuspend/parameters/debug_mask 0
+   write /sys/module/alarm/parameters/debug_mask 0
+   write /sys/module/alarm_dev/parameters/debug_mask 0
+   write /sys/module/binder/parameters/debug_mask 0
+   write /sys/module/xt_qtaguid/parameters/debug_mask 0 
+
+#--------------
+# System Tweaks
+# -------------
+
+   # None
+on property:persist.cpk.system_tweaks="0"
+   write /proc/sys/vm/dirty_background_ratio 5
+   write /proc/sys/vm/dirty_expire_centisecs 200
+   write /proc/sys/vm/dirty_ratio 20
+   write /proc/sys/vm/dirty_writeback_centisecs 500
+   write /proc/sys/vm/min_free_kbytes 3638
+   write /proc/sys/vm/swappiness 60
+   write /proc/sys/vm/vfs_cache_pressure 100
+   write /proc/sys/vm/drop_caches 0
+
+   # Boeffla 
+on property:persist.cpk.system_tweaks="1"
+   write /proc/sys/vm/dirty_background_ratio 70
+   write /proc/sys/vm/dirty_expire_centisecs 250
+   write /proc/sys/vm/dirty_ratio 90
+   write /proc/sys/vm/dirty_writeback_centisecs 500
+   write /proc/sys/vm/min_free_kbytes 4096
+   write /proc/sys/vm/swappiness 60
+   write /proc/sys/vm/vfs_cache_pressure 10
+   write /proc/sys/vm/drop_caches 3
+
+   # Speedmod
+on property:persist.cpk.system_tweaks="2"
+   write /proc/sys/vm/dirty_background_ratio 5
+   write /proc/sys/vm/dirty_expire_centisecs 200
+   write /proc/sys/vm/dirty_ratio 20
+   write /proc/sys/vm/dirty_writeback_centisecs 1500
+   write /proc/sys/vm/min_free_kbytes 12288
+   write /proc/sys/vm/swappiness 0
+   write /proc/sys/vm/vfs_cache_pressure 100
+   write /proc/sys/vm/drop_caches 0
+
+   # Mattiad
+on property:persist.cpk.system_tweaks="3"
+   write /proc/sys/vm/dirty_background_ratio 10
+   write /proc/sys/vm/dirty_expire_centisecs 500
+   write /proc/sys/vm/dirty_ratio 10
+   write /proc/sys/vm/dirty_writeback_centisecs 100
+   write /proc/sys/vm/min_free_kbytes 8192
+   write /proc/sys/vm/swappiness 70
+   write /proc/sys/vm/vfs_cache_pressure 500
+   write /proc/sys/vm/drop_caches 0
+
+#-------------
+# IO Scheduler 
+# ------------
+
+on property:persist.cpk.io_scheduler="cfg"
+   write /sys/block/mmcblk0/queue/scheduler "cfg"
+   write /sys/block/mmcblk1/queue/scheduler "cfg"
+
+on property:persist.cpk.io_scheduler="zen"
+   write /sys/block/mmcblk0/queue/scheduler "zen"
+   write /sys/block/mmcblk1/queue/scheduler "zen"
+
+on property:persist.cpk.io_scheduler="row"
+   write /sys/block/mmcblk0/queue/scheduler "row"
+   write /sys/block/mmcblk1/queue/scheduler "row"
+
+#---------------------
+# Shell Script Service 
+#---------------------
+
+on property:sys.boot_completed=1
+    start cherrypicked
+
+service cherrypicked /init.cpk.sh
+    user root
+    seclabel u:r:magisk:s0
+    oneshot
+    disabled
