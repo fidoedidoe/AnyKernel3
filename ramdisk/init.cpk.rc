@@ -284,38 +284,38 @@ on property:persist.cpk.gpu_profile="7-50"
 # Storage: Internal Read Ahead (KB)
 #----------------------------------
 
-on property:persist.cpk.sdcard_ra_kb="0"
+on property:persist.cpk.internal_ra_kb="0"
    write /sys/block/mmcblk0/bdi/read_ahead_kb 0
 
-on property:persist.cpk.sdcard_ra_kb="64"
+on property:persist.cpk.internal_ra_kb="64"
    write /sys/block/mmcblk0/bdi/read_ahead_kb 64
 
-on property:persist.cpk.sdcard_ra_kb="128"
+on property:persist.cpk.internal_ra_kb="128"
    write /sys/block/mmcblk0/bdi/read_ahead_kb 128
 
-on property:persist.cpk.sdcard_ra_kb="192"
+on property:persist.cpk.internal_ra_kb="192"
    write /sys/block/mmcblk0/bdi/read_ahead_kb 192
 
-on property:persist.cpk.sdcard_ra_kb="256"
+on property:persist.cpk.internal_ra_kb="256"
    write /sys/block/mmcblk0/bdi/read_ahead_kb 256
 
 #--------------------------------------------
 # Storage: External (SD Card) Read Ahead (KB)
 #--------------------------------------------
 
-on property:persist.cpk.sdcard_ra_kb="0"
+on property:persist.cpk.external_ra_kb="0"
    write /sys/block/mmcblk1/bdi/read_ahead_kb 0
 
-on property:persist.cpk.sdcard_ra_kb="64"
+on property:persist.cpk.external_ra_kb="64"
    write /sys/block/mmcblk1/bdi/read_ahead_kb 64
 
-on property:persist.cpk.sdcard_ra_kb="128"
+on property:persist.cpk.external_ra_kb="128"
    write /sys/block/mmcblk1/bdi/read_ahead_kb 128
 
-on property:persist.cpk.sdcard_ra_kb="192"
+on property:persist.cpk.external_ra_kb="192"
    write /sys/block/mmcblk1/bdi/read_ahead_kb 192
 
-on property:persist.cpk.sdcard_ra_kb="256"
+on property:persist.cpk.external_ra_kb="256"
    write /sys/block/mmcblk1/bdi/read_ahead_kb 256
 
 
