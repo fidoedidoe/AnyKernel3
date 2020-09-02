@@ -4,6 +4,64 @@
 # This is a common source of Android security bugs.
 #
 
+#--------------------------------------------
+# Default "install" properties "conservative"
+# -------
+# 
+# persist.cpk.cpu_gov "zzmoove"
+# persist.cpk.zzm_profile "1"
+# persist.cpk.idle "2"
+# persist.cpk.cpu_min "200000"
+# persist.cpk.cpu_max "1600000"
+# persist.cpk.gpu_profile "1-0"
+# persist.cpk.internal_ra_kb "128"
+# persist.cpk.external_ra_kb "128"
+# persist.cpk.cpu_idle "2"
+# persist.cpk.module_debug "1"
+# setprop persist.cpk.system_tweaks "0"
+# setprop persist.cpk.io_scheduler "cfg"
+#
+#
+# Recomended property values "performance (ish)" tested on N5110
+# -------
+# 
+# persist.cpk.cpu_gov "zzmoove"
+# persist.cpk.zzm_profile "8"
+# persist.cpk.idle "2"
+# persist.cpk.cpu_min "200000"
+# persist.cpk.cpu_max "1800000"
+# persist.cpk.gpu_profile "3-50"
+# persist.cpk.internal_ra_kb "128"
+# persist.cpk.external_ra_kb "128"
+# persist.cpk.cpu_idle "2"
+# persist.cpk.module_debug "0"
+# setprop persist.cpk.system_tweaks "1"
+# setprop persist.cpk.io_scheduler "cfg"
+#
+# 
+# Failsafe: 
+# --------
+# 
+# when setting properties results in a kernel panic / boot loop etc
+# then deleting the property file /data/property/persist.cpk.stable
+# will revert back to the default ("conservative") settings which
+# should work for all devices. from a root terminal shell (twrp terminal also works with /data mounted): 
+# rm /data/property/persist.cpk.stable 
+#--------------------------------------------
+
+
+#-------------------------------------------
+# To modify these values on the fly: 
+# 1. open an root terminal / adb root shell,
+     or run a terminal from TWRP with /data partition mounted 
+# 2. cd /data/property/
+# 3. to view current value for property, ie: 
+#    getprop getprop persist.cpk.zzm_profile
+# 4. to set a value for a property: 
+#    setprop persist.cpk.zzm_profile "8"
+#-------------------------------------------
+
+
 #-------------
 # CPU Govenor 
 #-------------
@@ -355,6 +413,7 @@ on property:persist.cpk.module_debug="1"
    write /sys/module/binder/parameters/debug_mask 7
    write /sys/module/xt_qtaguid/parameters/debug_mask 0 
 
+   #Turns off debugging for certain modules
 on property:persist.cpk.module_debug="0"
    write /sys/module/ump/parameters/ump_debug_level 0
    write /sys/module/mali/parameters/mali_debug_level 0
