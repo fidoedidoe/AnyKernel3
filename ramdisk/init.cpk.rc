@@ -87,6 +87,7 @@ on property:persist.cpk.cpu_gov="zzmoove"
 #  9: ZZ InZane            - based on performance with new insane scaling active. a new experience
 # 10: ZZ Gaming            - based on performance with scaling block enabled to avoid cpu overheating during gamepla
 # 11: ZZ Relax             - based on moderate (except hotplug settings) with relaxed sleep settings 
+# 12: lwk                  - NEW! made by xda user asad007 with yet unknown direction  
 
 on property:persist.cpk.zzm_profile="1"
     write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 1
@@ -121,6 +122,8 @@ on property:persist.cpk.zzm_profile="10"
 on property:persist.cpk.zzm_profile="11"
     write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 11
 
+on property:persist.cpk.zzm_profile="12"
+     write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 12
 
 #-----------------
 # CPU Min/Max Freq
