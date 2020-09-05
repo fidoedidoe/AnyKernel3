@@ -83,6 +83,10 @@ function write() {
        setprop persist.cpk.io_scheduler "row"
    fi
 
+   if [ ! -f /data/property/persist.cpk.cpu_voltage ] || [ $UNSTABLE -eq 1 ]; then
+       setprop persist.cpk.cpu_voltage "0"
+   fi
+
    #Read property values and set them again 
    #This triggers "on property" action in init.cp.rc
 
