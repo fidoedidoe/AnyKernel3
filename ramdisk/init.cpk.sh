@@ -135,7 +135,7 @@ if [ ! -f /data/property/persist.cpk.cpu_min ] || [ $UNSTABLE -eq 1 ]; then
    setprop persist.cpk.cpu_gov $cpu_gov
    setprop persist.cpk.cpu_min $cpu_min
    setprop persist.cpk.cpu_max $cpu_max
-   setprop persist.cpk.cpu_max $cpu_voltage
+   setprop persist.cpk.cpu_voltage $cpu_voltage
    setprop persist.cpk.cpu_idle $cpu_idle
    setprop persist.cpk.gpu_profile $gpu_profile
    setprop persist.cpk.internal_ra_kb $internal_ra_kb
