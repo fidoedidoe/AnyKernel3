@@ -44,7 +44,7 @@ function write() {
    fi
    
    if [ ! -f /data/property/persist.cpk.zzm_profile ] || [ $UNSTABLE -eq 1 ]; then
-       setprop persist.cpk.zzm_profile "1"
+       setprop persist.cpk.zzm_profile "8"
    fi
 
    if [ ! -f /data/property/persist.cpk.cpu_min ] || [ $UNSTABLE -eq 1 ]; then
@@ -60,23 +60,23 @@ function write() {
    fi
 
    if [ ! -f /data/property/persist.cpk.internal_ra_kb ] || [ $UNSTABLE -eq 1 ]; then
-       setprop persist.cpk.internal_ra_kb "128"
+       setprop persist.cpk.internal_ra_kb "512"
    fi
 
    if [ ! -f /data/property/persist.cpk.external_ra_kb ] || [ $UNSTABLE -eq 1 ]; then
-       setprop persist.cpk.external_ra_kb "128"
+       setprop persist.cpk.external_ra_kb "0"
    fi
 
    if [ ! -f /data/property/persist.cpk.cpu_idle ] || [ $UNSTABLE -eq 1 ]; then
-       setprop persist.cpk.cpu_idle "2"
+       setprop persist.cpk.cpu_idle "3"
    fi
 
    if [ ! -f /data/property/persist.cpk.module_debug ] || [ $UNSTABLE -eq 1 ]; then
-       setprop persist.cpk.module_debug "1"
+       setprop persist.cpk.module_debug "0"
    fi
 
    if [ ! -f /data/property/persist.cpk.system_tweaks ] || [ $UNSTABLE -eq 1 ]; then
-       setprop persist.cpk.system_tweaks "0"
+       setprop persist.cpk.system_tweaks "1"
    fi
 
    if [ ! -f /data/property/persist.cpk.io_scheduler ] || [ $UNSTABLE -eq 1 ]; then
