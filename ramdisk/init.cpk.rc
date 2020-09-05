@@ -18,7 +18,7 @@
 # persist.cpk.cpu_idle "3"
 # persist.cpk.module_debug "0"
 # setprop persist.cpk.system_tweaks "1"
-# setprop persist.cpk.io_scheduler "cfg"
+# setprop persist.cpk.io_scheduler "row"
 #
 # ----------------------------------------------------------------------
 # Recommended property values "performance over battery" tested on N5110

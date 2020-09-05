@@ -80,7 +80,7 @@ function write() {
    fi
 
    if [ ! -f /data/property/persist.cpk.io_scheduler ] || [ $UNSTABLE -eq 1 ]; then
-       setprop persist.cpk.io_scheduler "cfg"
+       setprop persist.cpk.io_scheduler "row"
    fi
 
    #Read property values and set them again 
