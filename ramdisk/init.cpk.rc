@@ -3,9 +3,28 @@
 # IMPORTANT: Do not create world writable files or directories.
 # This is a common source of Android security bugs.
 #
+#-------------------------------------
+# How to manage kernel tunable values: 
+#-------------------------------------
+# To modify properties on the fly (persists through reboot):
+# 
+# NOTE: 
+#   - initial values (step #3) are created on first boot, please install kernel and boot first before attempting to edit propety files)
+#   - the init.cpk.sh / init.cpk.rc files require magisk (and it's selpolicy) to run correctly. Install magisk with this kernel. 
+# 
+# 1. open an root terminal / adb root shell,
+     or open a terminal from TWRP with /data partition mounted 
+# 2. cd /data/property/
+# 3. To list all properties for this kernel run the command: 
+     ls -l persist.cpk.*
+# 3. To view current value for property use "getprop <propertyFileName>", ie: 
+#    getprop persist.cpk.zzm_profile
+# 4. To set a new value for a property (see permitted values below for each file below): 
+#    setprop persist.cpk.zzm_profile "8"
+#-------------------------------------
 
 #------------------------------------
-# Default "install" properties "safe"
+# Default "fresh install" properties "safe"
 # -------
 # 
 # persist.cpk.cpu_gov "zzmoove"
@@ -53,30 +72,18 @@
 #--------------------------------------------
 
 
-#-------------------------------------------
-# To modify properties on the fly (persists through reboot): 
-# 1. open an root terminal / adb root shell,
-     or run a terminal from TWRP with /data partition mounted 
-# 2. cd /data/property/
-# 3. To view current value for property use "getprop", ie: 
-#    getprop persist.cpk.zzm_profile
-# 4. to set a new value for a property (see permitted values below): 
-#    setprop persist.cpk.zzm_profile "8"
-#-------------------------------------------
-
-
-#------------
-# CPU Govenor 
-#------------
+#----------------------------------
+# CPU Govenor (/data/property/persist.cpk.cpu_gov)
+#----------------------------------
 on property:persist.cpk.cpu_gov="zzmoove"
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor zzmoove
     #write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor zzmoove
     #write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor zzmoove
     #write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor zzmoove
 
-#-----------------
-# ZZMoove profiles
-#-----------------
+#-----------------------------------------------------------
+# ZZMoove profiles (/adata/property/persist.cpk.zzm_profile)
+#-----------------------------------------------------------
 # for more details see: https://github.com/fidoedidoe/android_kernel_samsung_smdk4412/blob/cm-14.1-custom-zzmoove/drivers/cpufreq/cpufreq_zzmoove_profiles.h
 
 #  1: Default              - will set govenor defaults
@@ -128,9 +135,9 @@ on property:persist.cpk.zzm_profile="11"
 on property:persist.cpk.zzm_profile="12"
      write /sys/devices/system/cpu/cpufreq/zzmoove/profile_number 12
 
-#-----------------
-# CPU Min/Max Freq
-#-----------------
+#----------------------------------------------------------
+# CPU Min Mhz Freq (/data/property/persist.cpk.cpu_min)
+#----------------------------------------------------------
 
 on property:persist.cpk.cpu_min="100000"
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 100000
@@ -145,6 +152,10 @@ on property:persist.cpk.cpu_min="200000"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 200000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 200000
 
+
+#----------------------------------------------------------
+# CPU Max Mhz Freq (/data/property/persist.cpk.cpu_max)
+#----------------------------------------------------------
 
 on property:persist.cpk.cpu_max="1600000"
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1600000
@@ -170,9 +181,9 @@ on property:persist.cpk.cpu_max="1920000"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1920000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1920000
 
-#-----------------------
-# CPU Voltage adjustment 
-#-----------------------
+#----------------------------------------------------------------
+# CPU Voltage adjustment (/data/property/persist.cpk.cpu_voltage)
+#----------------------------------------------------------------
 
 on property:persist.cpk.cpu_voltage="+25"
     write /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table "1450 1425 1400 1325 1275 1250 1200 1175 1150 1125 1100 1075 1050 1025 1000 975 950 925 900"
@@ -192,9 +203,9 @@ on property:persist.cpk.cpu_voltage="-75"
 on property:persist.cpk.cpu_voltage="-100"
     write /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table "1325 1300 1275 1200 1150 1125 1075 1050 1025 1000 975 950 925 900 875 850 825 800 775"
 
-#------------------------------
-# GPU Freq, Scaling & Undervolt
-#------------------------------
+#-----------------------------------------------------------------------
+# GPU Freq, Scaling & Undervolt (/data/property/persist.cpk.gpu_profile)
+#-----------------------------------------------------------------------
 
 
 # 1-0 : Default  - Freq 160Mhz / 266Mhz / 350Mhz / 440Mhz / 533Mhz
@@ -366,9 +377,9 @@ on property:persist.cpk.gpu_profile="7-50"
    write /sys/class/misc/gpu_control/gpu_clock_control "90% 50% 90% 55% 90% 66% 90% 70%"
    write /sys/class/misc/gpu_control/gpu_voltage_control "887500 912500 992500 1087500 1160000"
 
-#----------------------------------
-# Storage: Internal Read Ahead (KB)
-#----------------------------------
+#-------------------------------------------------------------------------------
+# Storage: Internal Read Ahead (KB): (/data/property/persist.cpk.internal_ra_kb)
+#-------------------------------------------------------------------------------
 
 on property:persist.cpk.internal_ra_kb="0"
    write /sys/block/mmcblk0/bdi/read_ahead_kb 0
@@ -391,9 +402,9 @@ on property:persist.cpk.internal_ra_kb="512"
 on property:persist.cpk.internal_ra_kb="1024"
    write /sys/block/mmcblk0/bdi/read_ahead_kb 1024
 
-#--------------------------------------------
-# Storage: External (SD Card) Read Ahead (KB)
-#--------------------------------------------
+#-----------------------------------------------------------------------------------------
+# Storage: External (SD Card) Read Ahead (KB): (/data/property/persist.cpk.external_ra_kb)
+#-----------------------------------------------------------------------------------------
 
 on property:persist.cpk.external_ra_kb="0"
    write /sys/block/mmcblk1/bdi/read_ahead_kb 0
@@ -417,9 +428,9 @@ on property:persist.cpk.external_ra_kb="1024"
    write /sys/block/mmcblk1/bdi/read_ahead_kb 1024
 
 
-#--------------
-# CPU Idle mode
-# -------------
+#-----------------------------------------------------
+# CPU Idle mode: (/data/property/persist.cpk.cpu_idle)
+# ----------------------------------------------------
 
 # 0 = IDLE
 # 1 = AFTR
@@ -438,10 +449,11 @@ on property:persist.cpk.cpu_idle="2"
 on property:persist.cpk.cpu_idle="3"
    write /sys/module/cpuidle_exynos4/parameters/enable_mask 3
 
-#-----------------
-# Module Debugging (specific modules only)
-# ----------------
+#------------------------------------------------------------
+# Module Debugging: (/data/property/persist.cpk.module_debug)
+# ----------------------------------------------------------
 
+   # The following modules output to logfiles (with the stated debug log_level)
 on property:persist.cpk.module_debug="1"
    write /sys/module/ump/parameters/ump_debug_level 2
    write /sys/module/mali/parameters/mali_debug_level 2
@@ -453,7 +465,7 @@ on property:persist.cpk.module_debug="1"
    write /sys/module/binder/parameters/debug_mask 7
    write /sys/module/xt_qtaguid/parameters/debug_mask 0 
 
-   #Turns off debugging for certain modules
+   # Turns off modules output to logfile (switches debug log_level to zero)
 on property:persist.cpk.module_debug="0"
    write /sys/module/ump/parameters/ump_debug_level 0
    write /sys/module/mali/parameters/mali_debug_level 0
@@ -465,9 +477,9 @@ on property:persist.cpk.module_debug="0"
    write /sys/module/binder/parameters/debug_mask 0
    write /sys/module/xt_qtaguid/parameters/debug_mask 0 
 
-#--------------
-# System Tweaks
-# -------------
+#------------------------------------------------------------------
+# System Tweaks: (/data/property/setprop persist.cpk.system_tweaks)
+# -----------------------------------------------------------------
 
    # None
 on property:persist.cpk.system_tweaks="0"
@@ -513,9 +525,9 @@ on property:persist.cpk.system_tweaks="3"
    write /proc/sys/vm/vfs_cache_pressure 500
    write /proc/sys/vm/drop_caches 0
 
-#-------------
-# IO Scheduler 
-# ------------
+#----------------------------------------------------------------
+# IO Scheduler: (/data/property/setprop persist.cpk.io_scheduler)
+# ---------------------------------------------------------------
 
 on property:persist.cpk.io_scheduler="cfg"
    write /sys/block/mmcblk0/queue/scheduler "cfg"
