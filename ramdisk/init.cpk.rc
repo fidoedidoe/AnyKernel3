@@ -402,6 +402,12 @@ on property:persist.cpk.internal_ra_kb="512"
 on property:persist.cpk.internal_ra_kb="1024"
    write /sys/block/mmcblk0/bdi/read_ahead_kb 1024
 
+on property:persist.cpk.internal_ra_kb="1280"
+   write /sys/block/mmcblk0/bdi/read_ahead_kb 1280
+
+on property:persist.cpk.internal_ra_kb="1536"
+   write /sys/block/mmcblk0/bdi/read_ahead_kb 1536
+
 #-----------------------------------------------------------------------------------------
 # Storage: External (SD Card) Read Ahead (KB): (/data/property/persist.cpk.external_ra_kb)
 #-----------------------------------------------------------------------------------------
@@ -427,6 +433,11 @@ on property:persist.cpk.external_ra_kb="512"
 on property:persist.cpk.external_ra_kb="1024"
    write /sys/block/mmcblk1/bdi/read_ahead_kb 1024
 
+on property:persist.cpk.external_ra_kb="1280"
+   write /sys/block/mmcblk1/bdi/read_ahead_kb 1280
+
+on property:persist.cpk.external_ra_kb="1536"
+   write /sys/block/mmcblk1/bdi/read_ahead_kb 1536
 
 #-----------------------------------------------------
 # CPU Idle mode: (/data/property/persist.cpk.cpu_idle)

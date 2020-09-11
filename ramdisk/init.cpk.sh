@@ -47,7 +47,7 @@ function write() {
        setprop persist.cpk.cpu_gov "zzmoove"
    fi
    
-if [ ! -f /data/property/persist.cpk.cpu_min ] || [ $UNSTABLE -eq 1 ]; then
+   if [ ! -f /data/property/persist.cpk.cpu_min ] || [ $UNSTABLE -eq 1 ]; then
        setprop persist.cpk.cpu_min "200000"
    fi
 
