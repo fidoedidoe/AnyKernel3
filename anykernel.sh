@@ -10,10 +10,10 @@ do.modules=0
 do.systemless=1
 do.cleanup=1
 do.cleanuponabort=0
-device.name1=dreamlte
-device.name2=dream2lte
-device.name3=greatlte
-supported.versions=9
+device.name1=dream2lte
+device.name2=
+device.name3=
+supported.versions=10
 supported.patchlevels=
 '; } # end properties
 
@@ -67,8 +67,8 @@ rm -rf /system/priv-app/KnoxGuard;
 # end ramdisk changes
 
 # Check device dtb
-mv -f $home/*${device_name}*/Image $home/Image;
-mv -f $home/*${device_name}*/dtb_$device_name.img $split_img/extra;
+#mv -f $home/*${device_name}*/Image $home/Image;
+#mv -f $home/*${device_name}*/dtb_$device_name.img $split_img/extra;
 
 write_boot;
 ## end install
